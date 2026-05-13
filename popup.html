@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="ProxyFlow giúp chọn, lọc và cập nhật proxy công khai từ monosans/proxy-list trong Chrome.">
+    <title>ProxyFlow - Smart Proxy Picker</title>
+    <link rel="stylesheet" href="popup.css">
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="hero" aria-labelledby="app-title">
+        <div>
+          <p class="eyebrow">Chrome Proxy Extension</p>
+          <h1 id="app-title">ProxyFlow</h1>
+          <p id="statusText" class="status-text">Đang tải trạng thái...</p>
+        </div>
+        <div id="statusOrb" class="status-orb" title="Trạng thái proxy"></div>
+      </section>
+
+      <section class="quick-actions" aria-label="Thao tác nhanh">
+        <button id="directBtn" class="btn btn-secondary" type="button">Tắt Proxy</button>
+        <button id="refreshBtn" class="btn btn-primary" type="button">Cập nhật online</button>
+      </section>
+
+      <section class="ip-check-card" aria-labelledby="ip-check-title">
+        <div>
+          <p id="ip-check-title" class="section-label">Kiểm tra IP</p>
+          <h2>WhatIsMyIPAddress</h2>
+          <p id="ipCheckHint">Mở trang kiểm tra IP để xác nhận proxy đang hoạt động.</p>
+        </div>
+        <button id="checkIpBtn" class="btn btn-glow" type="button">Check IP</button>
+      </section>
+
+      <section class="selected-card" aria-labelledby="selected-title">
+        <p id="selected-title" class="section-label">Proxy đang chọn</p>
+        <div id="selectedProxy" class="selected-proxy">Chưa chọn proxy</div>
+      </section>
+
+      <section class="stats-grid" aria-label="Thống kê proxy">
+        <article>
+          <span id="totalCount">0</span>
+          <small>Tổng proxy</small>
+        </article>
+        <article>
+          <span id="countryCount">0</span>
+          <small>Quốc gia</small>
+        </article>
+        <article>
+          <span id="fastCount">0</span>
+          <small>Dưới 1 giây</small>
+        </article>
+      </section>
+
+      <section class="filters" aria-label="Bộ lọc proxy">
+        <label for="searchInput" class="visually-hidden">Tìm kiếm proxy</label>
+        <input id="searchInput" type="search" placeholder="Tìm quốc gia bằng tiếng Việt/English: Mỹ, USA, Nhật, Đức...">
+
+        <div class="filter-row">
+          <label for="protocolFilter" class="visually-hidden">Lọc giao thức</label>
+          <select id="protocolFilter">
+            <option value="all">Tất cả giao thức</option>
+          </select>
+
+          <label for="countryFilter" class="visually-hidden">Lọc quốc gia</label>
+          <select id="countryFilter">
+            <option value="all">Tất cả quốc gia</option>
+          </select>
+        </div>
+
+        <button id="randomCountryBtn" class="btn btn-random" type="button">🎲 Random kết nối theo quốc gia</button>
+        <p class="helper-text">Chọn một quốc gia rồi bấm random: extension sẽ tự lấy proxy nhanh bất kỳ, không cần quan tâm host nào.</p>
+      </section>
+
+      <section class="list-header" aria-label="Thông tin danh sách">
+        <span id="resultCount">0 proxy</span>
+        <span id="updatedAt">Offline data</span>
+      </section>
+
+      <section id="proxyList" class="proxy-list" aria-label="Danh sách proxy"></section>
+
+      <footer class="footer-note">
+        Sau khi kết nối, bấm <strong>Check IP</strong> để mở WhatIsMyIPAddress và xác nhận vị trí/IP mới.
+      </footer>
+    </main>
+
+    <script src="proxy-data.js"></script>
+    <script src="popup.js"></script>
+  </body>
+</html>
