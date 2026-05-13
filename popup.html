@@ -10,31 +10,36 @@
   <body>
     <main class="app-shell">
       <section class="hero" aria-labelledby="app-title">
-        <div>
-          <p class="eyebrow">Chrome Proxy Extension</p>
+        <div class="brand-mark" aria-hidden="true">
+          <span>PF</span>
+        </div>
+        <div class="hero-copy">
+          <p class="eyebrow">Smart Proxy Extension</p>
           <h1 id="app-title">ProxyFlow</h1>
           <p id="statusText" class="status-text">Đang tải trạng thái...</p>
         </div>
         <div id="statusOrb" class="status-orb" title="Trạng thái proxy"></div>
       </section>
 
-      <section class="quick-actions" aria-label="Thao tác nhanh">
-        <button id="directBtn" class="btn btn-secondary" type="button">Tắt Proxy</button>
-        <button id="refreshBtn" class="btn btn-primary" type="button">Cập nhật online</button>
-      </section>
-
-      <section class="ip-check-card" aria-labelledby="ip-check-title">
-        <div>
-          <p id="ip-check-title" class="section-label">Kiểm tra IP</p>
-          <h2>WhatIsMyIPAddress</h2>
-          <p id="ipCheckHint">Mở trang kiểm tra IP để xác nhận proxy đang hoạt động.</p>
-        </div>
-        <button id="checkIpBtn" class="btn btn-glow" type="button">Check IP</button>
-      </section>
-
       <section class="selected-card" aria-labelledby="selected-title">
-        <p id="selected-title" class="section-label">Proxy đang chọn</p>
+        <div class="selected-head">
+          <p id="selected-title" class="section-label">Kết nối hiện tại</p>
+          <span class="live-chip">Live</span>
+        </div>
         <div id="selectedProxy" class="selected-proxy">Chưa chọn proxy</div>
+      </section>
+
+      <section class="action-panel" aria-label="Thao tác chính">
+        <button id="randomCountryBtn" class="btn btn-random" type="button">
+          <span>🎲</span>
+          <strong>Random theo quốc gia</strong>
+          <small>Chọn nước, hệ thống tự lấy proxy tốt</small>
+        </button>
+        <div class="action-grid">
+          <button id="checkIpBtn" class="btn btn-glow" type="button">Check IP</button>
+          <button id="directBtn" class="btn btn-secondary" type="button">Tắt Proxy</button>
+          <button id="refreshBtn" class="btn btn-primary" type="button">Cập nhật</button>
+        </div>
       </section>
 
       <section class="stats-grid" aria-label="Thống kê proxy">
@@ -48,28 +53,32 @@
         </article>
         <article>
           <span id="fastCount">0</span>
-          <small>Dưới 1 giây</small>
+          <small>Proxy nhanh</small>
         </article>
       </section>
 
       <section class="filters" aria-label="Bộ lọc proxy">
-        <label for="searchInput" class="visually-hidden">Tìm kiếm proxy</label>
-        <input id="searchInput" type="search" placeholder="Tìm quốc gia bằng tiếng Việt/English: Mỹ, USA, Nhật, Đức...">
-
-        <div class="filter-row">
-          <label for="protocolFilter" class="visually-hidden">Lọc giao thức</label>
-          <select id="protocolFilter">
-            <option value="all">Tất cả giao thức</option>
-          </select>
-
-          <label for="countryFilter" class="visually-hidden">Lọc quốc gia</label>
-          <select id="countryFilter">
-            <option value="all">Tất cả quốc gia</option>
-          </select>
+        <div class="field-group search-field">
+          <label for="searchInput">Tìm nhanh</label>
+          <input id="searchInput" type="search" placeholder="Mỹ, USA, Nhật, Đức, host, ASN...">
         </div>
 
-        <button id="randomCountryBtn" class="btn btn-random" type="button">🎲 Random kết nối theo quốc gia</button>
-        <p class="helper-text">Chọn một quốc gia rồi bấm random: extension sẽ tự lấy proxy nhanh bất kỳ, không cần quan tâm host nào.</p>
+        <div class="filter-row">
+          <div class="field-group">
+            <label for="countryFilter">Quốc gia</label>
+            <select id="countryFilter">
+              <option value="all">Tất cả quốc gia</option>
+            </select>
+          </div>
+
+          <div class="field-group">
+            <label for="protocolFilter">Giao thức</label>
+            <select id="protocolFilter">
+              <option value="all">Tất cả giao thức</option>
+            </select>
+          </div>
+        </div>
+        <p class="helper-text">Mẹo: gõ tiếng Việt không dấu vẫn tìm được. Ví dụ: <strong>my</strong>, <strong>nhat</strong>, <strong>duc</strong>.</p>
       </section>
 
       <nav class="tabs" aria-label="Chế độ xem proxy">
@@ -85,7 +94,7 @@
       <section id="proxyList" class="proxy-list" aria-label="Danh sách proxy"></section>
 
       <footer class="footer-note">
-        Sau khi kết nối, bấm <strong>Check IP</strong> để mở WhatIsMyIPAddress và xác nhận vị trí/IP mới.
+        Chọn quốc gia → bấm random → Check IP. Public proxy có thể chết, hãy thử lại nếu chưa vào mạng.
       </footer>
     </main>
 
