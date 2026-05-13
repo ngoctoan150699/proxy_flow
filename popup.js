@@ -456,7 +456,15 @@ async function loadData() {
     ? saved[STORE.customProxies]
     : (window.PROXYFLOW_DEFAULT_PROXIES || []);
   state.meta = saved[STORE.customMeta] || window.PROXYFLOW_DEFAULT_META || {};
-  state.favorites = new Set(saved[STORE.favorites] || []);
+
+  const validProxyIds = new Set(state.proxies.map(proxyId));
+  const savedFavorites = Array.isArray(saved[STORE.favorites]) ? saved[STORE.favorites] : [];
+  const validFavorites = savedFavorites.filter((id) => validProxyIds.has(id));
+  state.favorites = new Set(validFavorites);
+  if (validFavorites.length !== savedFavorites.length) {
+    await chrome.storage.local.set({ [STORE.favorites]: validFavorites });
+  }
+
   state.language = saved[STORE.language] || detectLanguage();
   els.languageSelect.value = state.language;
 }
