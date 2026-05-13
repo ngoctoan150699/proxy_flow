@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "ProxyFlow - Smart Proxy Picker",
   "description": "Chọn nhanh proxy công khai, random theo quốc gia và kiểm tra IP hiện tại qua WhatIsMyIPAddress.",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "author": "ProxyFlow Clean-room Extension",
   "permissions": [
     "proxy",

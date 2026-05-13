@@ -14,7 +14,19 @@
           <span>PF</span>
         </div>
         <div class="hero-copy">
-          <p class="eyebrow">Smart Proxy Extension</p>
+          <div class="hero-topline">
+            <p class="eyebrow" data-i18n="eyebrow">Smart Proxy Extension</p>
+            <label for="languageSelect" class="visually-hidden">Language</label>
+            <select id="languageSelect" class="language-select" aria-label="Language">
+              <option value="vi">VI</option>
+              <option value="en">EN</option>
+              <option value="zh">中文</option>
+              <option value="ru">RU</option>
+              <option value="es">ES</option>
+              <option value="fr">FR</option>
+              <option value="ja">日本</option>
+            </select>
+          </div>
           <h1 id="app-title">ProxyFlow</h1>
           <p id="statusText" class="status-text">Đang tải trạng thái...</p>
         </div>
@@ -23,8 +35,8 @@
 
       <section class="selected-card" aria-labelledby="selected-title">
         <div class="selected-head">
-          <p id="selected-title" class="section-label">Kết nối hiện tại</p>
-          <span class="live-chip">Live</span>
+          <p id="selected-title" class="section-label" data-i18n="currentConnection">Kết nối hiện tại</p>
+          <span class="live-chip" data-i18n="live">Live</span>
         </div>
         <div id="selectedProxy" class="selected-proxy">Chưa chọn proxy</div>
       </section>
@@ -32,57 +44,57 @@
       <section class="action-panel" aria-label="Thao tác chính">
         <button id="randomCountryBtn" class="btn btn-random" type="button">
           <span>🎲</span>
-          <strong>Random theo quốc gia</strong>
-          <small>Chọn nước, hệ thống tự lấy proxy tốt</small>
+          <strong data-i18n="randomTitle">Random theo quốc gia</strong>
+          <small data-i18n="randomSubtitle">Chọn nước, hệ thống tự lấy proxy tốt</small>
         </button>
         <div class="action-grid">
-          <button id="checkIpBtn" class="btn btn-glow" type="button">Check IP</button>
-          <button id="directBtn" class="btn btn-secondary" type="button">Tắt Proxy</button>
-          <button id="refreshBtn" class="btn btn-primary" type="button">Cập nhật</button>
+          <button id="checkIpBtn" class="btn btn-glow" type="button" data-i18n="checkIp">Check IP</button>
+          <button id="directBtn" class="btn btn-secondary" type="button" data-i18n="turnOff">Tắt Proxy</button>
+          <button id="refreshBtn" class="btn btn-primary" type="button" data-i18n="refresh">Cập nhật</button>
         </div>
       </section>
 
       <section class="stats-grid" aria-label="Thống kê proxy">
         <article>
           <span id="totalCount">0</span>
-          <small>Tổng proxy</small>
+          <small data-i18n="totalProxy">Tổng proxy</small>
         </article>
         <article>
           <span id="countryCount">0</span>
-          <small>Quốc gia</small>
+          <small data-i18n="countries">Quốc gia</small>
         </article>
         <article>
           <span id="fastCount">0</span>
-          <small>Proxy nhanh</small>
+          <small data-i18n="fastProxy">Proxy nhanh</small>
         </article>
       </section>
 
       <section class="filters" aria-label="Bộ lọc proxy">
         <div class="field-group search-field">
-          <label for="searchInput">Tìm nhanh</label>
+          <label for="searchInput" data-i18n="quickSearch">Tìm nhanh</label>
           <input id="searchInput" type="search" placeholder="Mỹ, USA, Nhật, Đức, host, ASN...">
         </div>
 
         <div class="filter-row">
           <div class="field-group">
-            <label for="countryFilter">Quốc gia</label>
+            <label for="countryFilter" data-i18n="country">Quốc gia</label>
             <select id="countryFilter">
               <option value="all">Tất cả quốc gia</option>
             </select>
           </div>
 
           <div class="field-group">
-            <label for="protocolFilter">Giao thức</label>
+            <label for="protocolFilter" data-i18n="protocol">Giao thức</label>
             <select id="protocolFilter">
               <option value="all">Tất cả giao thức</option>
             </select>
           </div>
         </div>
-        <p class="helper-text">Mẹo: gõ tiếng Việt không dấu vẫn tìm được. Ví dụ: <strong>my</strong>, <strong>nhat</strong>, <strong>duc</strong>.</p>
+        <p class="helper-text" data-i18n="searchTip">Mẹo: gõ tiếng Việt không dấu vẫn tìm được. Ví dụ: <strong>my</strong>, <strong>nhat</strong>, <strong>duc</strong>.</p>
       </section>
 
       <nav class="tabs" aria-label="Chế độ xem proxy">
-        <button id="allTabBtn" class="tab-btn active" type="button" data-view="all">Tất cả</button>
+        <button id="allTabBtn" class="tab-btn active" type="button" data-view="all" data-i18n="all">Tất cả</button>
         <button id="favoritesTabBtn" class="tab-btn" type="button" data-view="favorites">★ Yêu thích</button>
       </nav>
 
@@ -93,7 +105,7 @@
 
       <section id="proxyList" class="proxy-list" aria-label="Danh sách proxy"></section>
 
-      <footer class="footer-note">
+      <footer class="footer-note" data-i18n="footerTip">
         Chọn quốc gia → bấm random → Check IP. Public proxy có thể chết, hãy thử lại nếu chưa vào mạng.
       </footer>
     </main>
