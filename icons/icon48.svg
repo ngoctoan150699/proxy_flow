@@ -1,18 +1,39 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128">
+﻿<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 128 128" role="img" aria-label="ProxyFlow icon">
   <defs>
-    <linearGradient id="g" x1="18" y1="14" x2="108" y2="116" gradientUnits="userSpaceOnUse">
+    <linearGradient id="bg" x1="14" y1="10" x2="114" y2="122" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#07111f"/>
+      <stop offset="0.48" stop-color="#111827"/>
+      <stop offset="1" stop-color="#172554"/>
+    </linearGradient>
+    <linearGradient id="flow" x1="24" y1="80" x2="106" y2="36" gradientUnits="userSpaceOnUse">
       <stop stop-color="#22d3ee"/>
-      <stop offset="0.55" stop-color="#8b5cf6"/>
+      <stop offset="0.5" stop-color="#8b5cf6"/>
       <stop offset="1" stop-color="#34d399"/>
     </linearGradient>
-    <filter id="s" x="-20%" y="-20%" width="140%" height="140%">
-      <feDropShadow dx="0" dy="10" stdDeviation="10" flood-color="#000" flood-opacity="0.35"/>
+    <radialGradient id="glow" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(37 30) rotate(49) scale(88)">
+      <stop stop-color="#22d3ee" stop-opacity="0.48"/>
+      <stop offset="1" stop-color="#22d3ee" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="shadow" x="-25%" y="-25%" width="150%" height="150%">
+      <feDropShadow dx="0" dy="12" stdDeviation="10" flood-color="#000000" flood-opacity="0.42"/>
     </filter>
   </defs>
-  <rect width="128" height="128" rx="30" fill="#07111f"/>
-  <path d="M25 75c18-34 42 10 60-24 7-13 15-18 25-17" fill="none" stroke="url(#g)" stroke-width="14" stroke-linecap="round" filter="url(#s)"/>
-  <circle cx="28" cy="76" r="13" fill="#22d3ee"/>
-  <circle cx="64" cy="64" r="16" fill="#8b5cf6"/>
-  <circle cx="102" cy="34" r="13" fill="#34d399"/>
-  <path d="M40 94h48" stroke="#e5f0ff" stroke-width="8" stroke-linecap="round" opacity="0.9"/>
+
+  <rect width="48" height="48" rx="30" fill="url(#bg)"/>
+  <rect width="48" height="48" rx="30" fill="url(#glow)"/>
+
+  <g filter="url(#shadow)">
+    <path d="M28 78C42 50 57 52 71 64C82 73 89 74 101 51" fill="none" stroke="url(#flow)" stroke-width="13" stroke-linecap="round"/>
+    <path d="M79 40H104V65" fill="none" stroke="#34d399" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+
+  <circle cx="28" cy="78" r="12" fill="#22d3ee"/>
+  <circle cx="64" cy="64" r="15" fill="#8b5cf6"/>
+  <circle cx="101" cy="51" r="12" fill="#34d399"/>
+
+  <path d="M37 95H91" stroke="#e5f0ff" stroke-width="7" stroke-linecap="round" opacity="0.92"/>
+  <path d="M45 106H83" stroke="#94a3b8" stroke-width="5" stroke-linecap="round" opacity="0.72"/>
+
+  <circle cx="30" cy="28" r="3" fill="#e5f0ff" opacity="0.78"/>
+  <circle cx="101" cy="94" r="3" fill="#22d3ee" opacity="0.72"/>
 </svg>

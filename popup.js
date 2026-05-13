@@ -14,7 +14,8 @@ const state = {
   meta: window.PROXYFLOW_DEFAULT_META || {},
   search: "",
   protocol: "all",
-  country: "all"
+  country: "all",
+  view: "all"
 };
 
 const COUNTRY_ALIASES = {
@@ -56,6 +57,8 @@ const els = {
   protocolFilter: $("protocolFilter"),
   countryFilter: $("countryFilter"),
   randomCountryBtn: $("randomCountryBtn"),
+  allTabBtn: $("allTabBtn"),
+  favoritesTabBtn: $("favoritesTabBtn"),
   resultCount: $("resultCount"),
   updatedAt: $("updatedAt"),
   proxyList: $("proxyList")
@@ -101,6 +104,8 @@ function bindEvents() {
   els.refreshBtn.addEventListener("click", refreshOnline);
   els.checkIpBtn.addEventListener("click", openIpChecker);
   els.randomCountryBtn.addEventListener("click", applyRandomByCountry);
+  els.allTabBtn.addEventListener("click", () => switchView("all"));
+  els.favoritesTabBtn.addEventListener("click", () => switchView("favorites"));
 }
 
 async function loadData() {
@@ -165,16 +170,23 @@ function renderStatus() {
 function renderList() {
   const q = state.search;
   state.filtered = state.proxies
+    .filter((p) => state.view === "all" || state.favorites.has(proxyId(p)))
     .filter((p) => state.protocol === "all" || p.protocol === state.protocol)
     .filter((p) => state.country === "all" || p.country === state.country)
     .filter((p) => !q || searchable(p).includes(q))
     .sort((a, b) => favoriteScore(b) - favoriteScore(a) || Number(a.timeout) - Number(b.timeout))
     .slice(0, 120);
 
-  els.resultCount.textContent = `${state.filtered.length.toLocaleString("vi-VN")} proxy hiển thị`;
+  renderTabs();
+  const suffix = state.view === "favorites" ? "proxy yêu thích" : "proxy hiển thị";
+  els.resultCount.textContent = `${state.filtered.length.toLocaleString("vi-VN")} ${suffix}`;
 
   if (!state.filtered.length) {
-    els.proxyList.innerHTML = `<article class="proxy-card"><div class="proxy-main"><strong>Không tìm thấy proxy phù hợp</strong><div class="proxy-meta">Thử đổi bộ lọc hoặc bấm cập nhật online.</div></div></article>`;
+    const emptyTitle = state.view === "favorites" ? "Chưa có proxy yêu thích" : "Không tìm thấy proxy phù hợp";
+    const emptyHint = state.view === "favorites"
+      ? "Bấm nút ☆ trên proxy để lưu vào tab Yêu thích."
+      : "Thử đổi bộ lọc hoặc bấm cập nhật online.";
+    els.proxyList.innerHTML = `<article class="proxy-card empty-card"><div class="proxy-main"><strong>${emptyTitle}</strong><div class="proxy-meta">${emptyHint}</div></div></article>`;
     return;
   }
 
@@ -229,6 +241,20 @@ async function toggleFavorite(index) {
   else state.favorites.add(id);
   await chrome.storage.local.set({ [STORE.favorites]: [...state.favorites] });
   renderList();
+}
+
+function switchView(view) {
+  state.view = view;
+  renderList();
+}
+
+function renderTabs() {
+  const favoriteCount = state.favorites.size;
+  els.allTabBtn.classList.toggle("active", state.view === "all");
+  els.favoritesTabBtn.classList.toggle("active", state.view === "favorites");
+  els.allTabBtn.setAttribute("aria-selected", String(state.view === "all"));
+  els.favoritesTabBtn.setAttribute("aria-selected", String(state.view === "favorites"));
+  els.favoritesTabBtn.textContent = `★ Yêu thích (${favoriteCount})`;
 }
 
 async function applyRandomByCountry() {
